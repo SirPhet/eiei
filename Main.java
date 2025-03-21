@@ -2,7 +2,8 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        JFrame window = new JFrame("TowerDefense");
+
+        JFrame window = new JFrame("TowerDefenseEiei");
         window.setSize(800,600);
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setLocationRelativeTo(null);
