@@ -52,8 +52,8 @@ public class map extends JPanel implements MouseListener {
         ImageIcon bar_effect = new ImageIcon("Selected_effect.png");
         effect_bar = bar_effect.getImage();
 
-        //enemy spawm part
-        enemy.add(new Enemy(100,1,80,550))  ;
+        //enemy spawm part //ตอนเทสปรับเลือดตรงนี้
+        enemy.add(new Enemy(100000,1,80,550))  ;
 
 
         //game loop
@@ -68,6 +68,20 @@ public class map extends JPanel implements MouseListener {
             if (isClicked) {
                 chenck_x_y();
             }
+
+            for (Char units : unit) {
+                for (Enemy enemys : enemy) {
+                    units.hit(enemys);
+                    enemys.damage_take(units);
+                    //check enemy x_y
+//                    System.out.printf("Enemy x :");
+//                    System.out.println(enemys.enemy_x);
+//                    System.out.printf("Enemy y :");
+//                    System.out.println(enemys.enemy_y);
+                }
+            }
+
+
             repaint();
 
         });
@@ -128,7 +142,9 @@ public class map extends JPanel implements MouseListener {
 
     public void chenck_x_y() {
         if (isClicked) {
+            System.out.print("X: ");
             System.out.println(mouse.getMouse_x());
+            System.out.printf("Y: ");
             System.out.println(mouse.getMouse_y());
             mouse.mouse_clicked = false;
             System.out.println(mouse.cick_count);
@@ -170,7 +186,8 @@ public class map extends JPanel implements MouseListener {
         spawn_x = e.getX();
         spawn_y = e.getY();
         if(isEffect_select_1) {
-            unit.add(new Char(1,300,200,20,spawn_x,spawn_y)) ;
+            //ปรับดาเมจตัวแรกตรงนี้
+            unit.add(new Char(1,50,200,20,spawn_x,spawn_y)) ;
         }
         if(isEffect_select_2) {
             unit.add(new Char(2,300,200,20,spawn_x,spawn_y)) ;
