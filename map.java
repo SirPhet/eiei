@@ -39,6 +39,7 @@ public class map extends JPanel implements MouseListener {
 
     // Timer for fps
     private Timer timer;
+    private Timer timer_for_enemy ;
 
     public map() {
         setFocusable(true);
@@ -53,7 +54,13 @@ public class map extends JPanel implements MouseListener {
         effect_bar = bar_effect.getImage();
 
         //enemy spawm part //ตอนเทสปรับเลือดตรงนี้
-        enemy.add(new Enemy(100000,1,80,550))  ;
+        enemy.add(new Enemy(20000,1,80,550))  ;
+        timer_for_enemy = new Timer(1000, e ->{
+            enemy.add(new Enemy(20000,1, 80,550))  ;
+        });
+        timer_for_enemy.start();
+
+
 
 
         //game loop
@@ -73,14 +80,14 @@ public class map extends JPanel implements MouseListener {
                 for (Enemy enemys : enemy) {
                     units.hit(enemys);
                     enemys.damage_take(units);
-                    //check enemy x_y
-//                    System.out.printf("Enemy x :");
-//                    System.out.println(enemys.enemy_x);
-//                    System.out.printf("Enemy y :");
-//                    System.out.println(enemys.enemy_y);
                 }
             }
 
+           for (int i = 0 ; i < enemy.size() ; i++ ) {
+               if (enemy.get(i).healt <= 0 ) {
+                   enemy.remove(i);
+               }
+           }
 
             repaint();
 

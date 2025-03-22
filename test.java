@@ -1,7 +1,8 @@
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class test {
     public static void main(String[] args) {
-        System.out.println(test.class.getResource("immage/ui/char_bar.png"));
+        ArrayList<Enemy> enemy = new ArrayList<>() ;
     }
 }

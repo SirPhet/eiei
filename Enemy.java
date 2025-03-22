@@ -24,15 +24,14 @@ public class Enemy {
     }
 
     public void move() {
-        if(isAlive){
-            if(enemy_y > 65 ) {
-                enemy_y -= speed ;
-            }
-            else {
-                enemy_x += speed ;
-            }
-
+        if(enemy_y > 65 ) {
+            enemy_y -= speed ;
         }
+        else {
+            enemy_x += speed ;
+        }
+
+
 
     }
 
@@ -51,7 +50,7 @@ public class Enemy {
     }
 
     public void draw(Graphics g) {
-        if(isAlive) {
+        if(healt > 0) {
             g.setColor(Color.BLACK);
             g.fillRect(enemy_x,enemy_y,50,50);
         }
