@@ -26,6 +26,10 @@ public class map extends JPanel implements MouseListener {
 
     private ArrayList<Char> unit = new ArrayList<>();
     private ArrayList<Enemy> enemy = new ArrayList<>() ;
+    //enemy in hitbox
+    private ArrayList<Enemy> enemy_in_hit_box = new ArrayList<>() ;
+    private Enemy enemy_target ;
+
 
     private Mouse mouse = new Mouse();
     boolean isClicked = mouse.isMouse_clicked();
@@ -41,6 +45,9 @@ public class map extends JPanel implements MouseListener {
     private Timer timer;
     private Timer timer_for_enemy ;
 
+    //target setting
+    private Enemy target = null ;
+
     public map() {
         setFocusable(true);
         addMouseListener(this);
@@ -55,16 +62,16 @@ public class map extends JPanel implements MouseListener {
 
         //enemy spawm part //ตอนเทสปรับเลือดตรงนี้
         enemy.add(new Enemy(20000,1,80,550))  ;
-        timer_for_enemy = new Timer(1000, e ->{
-            enemy.add(new Enemy(20000,1, 80,550))  ;
-        });
-        timer_for_enemy.start();
 
 
 
 
         //game loop
         timer = new Timer(1000 / 60, e -> {
+            if(enemy.size() == 2 ) {
+                timer_for_enemy.stop();
+            }
+
             isClicked = mouse.isMouse_clicked();
             select_effect();
 
@@ -75,12 +82,24 @@ public class map extends JPanel implements MouseListener {
             if (isClicked) {
                 chenck_x_y();
             }
-
             for (Char units : unit) {
                 for (Enemy enemys : enemy) {
+                    if( units.select(enemys) ) {
+                        enemy_in_hit_box.add(enemys) ;
+                    }
+                    if(!units.select(enemys) && enemy_in_hit_box.equals(enemy)) {
+                        enemy_in_hit_box.remove(enemys) ;
+                    }
+                }
+            }
+
+
+            for (Char units : unit) {
+                for (Enemy enemys : enemy_in_hit_box) {
                     units.hit(enemys);
                     enemys.damage_take(units);
                 }
+
             }
 
            for (int i = 0 ; i < enemy.size() ; i++ ) {
@@ -89,10 +108,14 @@ public class map extends JPanel implements MouseListener {
                }
            }
 
+
+
             repaint();
 
         });
         timer.start();
+
+
 
 
 
@@ -194,7 +217,7 @@ public class map extends JPanel implements MouseListener {
         spawn_y = e.getY();
         if(isEffect_select_1) {
             //ปรับดาเมจตัวแรกตรงนี้
-            unit.add(new Char(1,50,200,20,spawn_x,spawn_y)) ;
+            unit.add(new Char(1,1,200,20,spawn_x,spawn_y)) ;
         }
         if(isEffect_select_2) {
             unit.add(new Char(2,300,200,20,spawn_x,spawn_y)) ;

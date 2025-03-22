@@ -13,7 +13,7 @@ public class Char {
     public int x_after_spawm ;
     public int y_after_spawm ;
     public Enemy enemy ;
-
+    public boolean target = false;
 
     //immage char
     public Image Char_number_1  ;
@@ -79,15 +79,25 @@ public class Char {
     public void hit(Enemy e) {
        if(e.enemy_y+50 >= hit_area_top && e.enemy_y <= hit_area_bottoms && e.enemy_x+50 >= hit_area_left && e.enemy_x <= hit_area_right) {
            check_can_hit = true ;
+           target = true ;
        }
        else {
            check_can_hit = false ;
+           target = false ;
        }
-       if(check_can_hit) {
+       if(check_can_hit&& target) {
            e.damage_take(this);
 //           System.out.println("in area");
        }
 
+   }
+   public boolean select(Enemy e) {
+       if(e.enemy_y+50 >= hit_area_top && e.enemy_y <= hit_area_bottoms && e.enemy_x+50 >= hit_area_left && e.enemy_x <= hit_area_right) {
+           return true ;
+       }
+       else {
+           return false ;
+       }
    }
 
     public int getDamage() {
