@@ -15,6 +15,8 @@ public class Char {
     public Enemy enemy ;
     public boolean target = false;
 
+    public Timer timer ;
+
     //immage char
     public Image Char_number_1  ;
     public Image Char_number_2  ;
@@ -77,15 +79,16 @@ public class Char {
     }
 
     public void hit(Enemy e) {
+
        if(e.enemy_y+50 >= hit_area_top && e.enemy_y <= hit_area_bottoms && e.enemy_x+50 >= hit_area_left && e.enemy_x <= hit_area_right) {
            check_can_hit = true ;
-           target = true ;
+
        }
        else {
            check_can_hit = false ;
-           target = false ;
+
        }
-       if(check_can_hit&& target) {
+       if(check_can_hit) {
            e.damage_take(this);
 //           System.out.println("in area");
        }
