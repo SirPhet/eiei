@@ -14,7 +14,7 @@ public class Char {
     public int y_after_spawm ;
     public Enemy enemy ;
     public boolean target = false;
-
+    public int cooldown = 0 ;
     public Timer timer ;
 
     //immage char
@@ -88,9 +88,13 @@ public class Char {
            check_can_hit = false ;
 
        }
-       if(check_can_hit) {
+       if(check_can_hit && cooldown <= 0 ) {
            e.damage_take(this);
+           cooldown = 60 ;
 //           System.out.println("in area");
+       }
+       if(cooldown > 0) {
+           cooldown-- ;
        }
 
    }

@@ -220,7 +220,7 @@ public class map extends JPanel implements MouseListener {
             unit.add(new Char(1,50,200,20,spawn_x,spawn_y)) ;
         }
         if(isEffect_select_2) {
-            unit.add(new Char(2,300,200,20,spawn_x,spawn_y)) ;
+            unit.add(new Char(2,5000,200,20,spawn_x,spawn_y)) ;
         }
 //        if(isEffect_select_3) {
 //            unit.add(new Char(300,200,20,spawn_x,spawn_y)) ;
