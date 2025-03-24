@@ -10,6 +10,7 @@ public class Enemy {
     public Char unit ;
     public int damage_count = 0 ;
     public boolean isAlive = true ;
+    public int slow = 2 ;
 
     public Enemy() {
 
@@ -24,12 +25,19 @@ public class Enemy {
     }
 
     public void move() {
-        if(enemy_y > 65 ) {
-            enemy_y -= speed ;
+        if(slow <= 0) {
+            if(enemy_y > 65 ) {
+                enemy_y -= speed ;
+            }
+            else {
+                enemy_x += speed ;
+            }
+            slow = 2 ;
         }
         else {
-            enemy_x += speed ;
+            slow-- ;
         }
+
 
 
 

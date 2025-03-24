@@ -8,9 +8,10 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 
+
 public class map extends JPanel implements MouseListener {
-    public int high = 600;
-    public int width = 800;
+    public int high = 810;
+    public int width = 1440;
 
     private int spawn_x;
     private int spawn_y;
@@ -27,11 +28,12 @@ public class map extends JPanel implements MouseListener {
     private ArrayList<Char> unit = new ArrayList<>();
     private ArrayList<Enemy> enemy = new ArrayList<>() ;
     //enemy in hitbox
-    public Timer timer_spawn ;
+
 
 
     private Mouse mouse = new Mouse();
     boolean isClicked = mouse.isMouse_clicked();
+
 
     public boolean isEffect_select_1 = false;
     private boolean isEffect_select_2 = false;
@@ -62,10 +64,6 @@ public class map extends JPanel implements MouseListener {
         //enemy spawm part //ตอนเทสปรับเลือดตรงนี้
         enemy.add(new Enemy(20000,1,80,550))  ;
 
-        timer_spawn = new Timer(2000,e -> {
-            enemy.add(new Enemy(20000,1,80,550))  ;
-        });
-        timer_spawn.start();
 
 
 
@@ -110,10 +108,14 @@ public class map extends JPanel implements MouseListener {
 
 
 
+
+
             repaint();
 
         });
         timer.start();
+
+        //area_of_bar
 
 
 
@@ -139,29 +141,29 @@ public class map extends JPanel implements MouseListener {
 
 
         //Charracter bar
-        g2d.drawImage(char_bar, 120, 450, 600, 100, this);
+        g2d.drawImage(char_bar, 420, 680, 600, 100, this);
 
 
         //effect selected
         if(isEffect_select_1) {
-            g2d.drawImage(effect_bar, 120, 450, 100, 100, this);
+            g2d.drawImage(effect_bar, 420, 680, 100, 100, this);
 
         }
         if(isEffect_select_2) {
-            g2d.drawImage(effect_bar, 220, 450, 100, 100, this);
+            g2d.drawImage(effect_bar, 520, 680, 100, 100, this);
 
         }
         if(isEffect_select_3) {
-            g2d.drawImage(effect_bar, 320, 450, 100, 100, this);
+            g2d.drawImage(effect_bar, 620, 680, 100, 100, this);
         }
         if(isEffect_select_4) {
-            g2d.drawImage(effect_bar, 420, 450, 100, 100, this);
+            g2d.drawImage(effect_bar, 720, 680, 100, 100, this);
         }
         if(isEffect_select_5) {
-            g2d.drawImage(effect_bar, 520, 450, 100, 100, this);
+            g2d.drawImage(effect_bar, 820, 680, 100, 100, this);
         }
         if(isEffect_select_6) {
-            g2d.drawImage(effect_bar, 620, 450, 100, 100, this);
+            g2d.drawImage(effect_bar, 920, 680, 100, 100, this);
         }
 
 
@@ -183,22 +185,22 @@ public class map extends JPanel implements MouseListener {
 
     public void select_effect() {
 
-        if (mouse.getMouse_x() >= 121 && mouse.getMouse_x() <= 218 && mouse.getMouse_y() >= 460 && mouse.getMouse_y() <= 549) {
+        if (mouse.getMouse_x() >= 420 && mouse.getMouse_x() <= 520 && mouse.getMouse_y() >= 680 && mouse.getMouse_y() <= 780) {
             isEffect_select_1 = true;
         }
-        if (mouse.getMouse_x() >= 220 && mouse.getMouse_x() <= 320 && mouse.getMouse_y() >= 460 && mouse.getMouse_y() <= 549) {
+        if (mouse.getMouse_x() >= 520 && mouse.getMouse_x() <= 620 && mouse.getMouse_y() >= 680 && mouse.getMouse_y() <= 780) {
             isEffect_select_2 = true;
         }
-        if (mouse.getMouse_x() >= 320 && mouse.getMouse_x() <= 420 && mouse.getMouse_y() >= 460 && mouse.getMouse_y() <= 549) {
+        if (mouse.getMouse_x() >= 620 && mouse.getMouse_x() <= 720 && mouse.getMouse_y() >= 680 && mouse.getMouse_y() <= 780) {
             isEffect_select_3 = true;
         }
-        if (mouse.getMouse_x() >= 420 && mouse.getMouse_x() <= 520 && mouse.getMouse_y() >= 460 && mouse.getMouse_y() <= 549) {
+        if (mouse.getMouse_x() >= 720 && mouse.getMouse_x() <= 820 && mouse.getMouse_y() >= 680 && mouse.getMouse_y() <= 780) {
             isEffect_select_4 = true;
         }
-        if (mouse.getMouse_x() >= 520 && mouse.getMouse_x() <= 620 && mouse.getMouse_y() >= 460 && mouse.getMouse_y() <= 549) {
+        if (mouse.getMouse_x() >= 820 && mouse.getMouse_x() <= 920 && mouse.getMouse_y() >= 680 && mouse.getMouse_y() <= 780) {
             isEffect_select_5 = true;
         }
-        if (mouse.getMouse_x() >= 620 && mouse.getMouse_x() <= 720 && mouse.getMouse_y() >= 460 && mouse.getMouse_y() <= 549) {
+        if (mouse.getMouse_x() >= 920 && mouse.getMouse_x() <= 1020 && mouse.getMouse_y() >= 680 && mouse.getMouse_y() <= 780) {
             isEffect_select_6 = true;
         }
 
@@ -210,18 +212,21 @@ public class map extends JPanel implements MouseListener {
     }
 
 
+
     //mosue setting
     @Override
     public void mouseClicked(MouseEvent e) {
         spawn_x = e.getX();
         spawn_y = e.getY();
-        if(isEffect_select_1) {
-            //ปรับดาเมจตัวแรกตรงนี้
-            unit.add(new Char(1,50,200,20,spawn_x,spawn_y)) ;
-        }
-        if(isEffect_select_2) {
-            unit.add(new Char(2,5000,200,20,spawn_x,spawn_y)) ;
-        }
+        if(!(spawn_x >= 420 && spawn_x <= 1020 && spawn_y >= 680 && spawn_y <= 780) &&
+                !(spawn_x >= 3 && spawn_x <=1335 &&spawn_y>= 90 &&spawn_y<=154))  {
+            if(isEffect_select_1) {
+                //ปรับดาเมจตัวแรกตรงนี้
+                unit.add(new Char(1,50,200,20,spawn_x,spawn_y)) ;
+            }
+            if(isEffect_select_2) {
+                unit.add(new Char(2,5000,200,20,spawn_x,spawn_y)) ;
+            }
 //        if(isEffect_select_3) {
 //            unit.add(new Char(300,200,20,spawn_x,spawn_y)) ;
 //        }
@@ -234,25 +239,29 @@ public class map extends JPanel implements MouseListener {
 //        if(isEffect_select_6) {
 //            unit.add(new Char(300,200,20,spawn_x,spawn_y)) ;
 //        }
+        }
 
 
 
-        if (mouse.getMouse_x() >= 121 && mouse.getMouse_x() <= 218 && mouse.getMouse_y() >= 460 && mouse.getMouse_y() <= 549) {
+
+
+
+        if (mouse.getMouse_x() >= 420 && mouse.getMouse_x() <= 520 && mouse.getMouse_y() >= 680 && mouse.getMouse_y() <= 780) {
             isEffect_select_1 = false;
         }
-        if (mouse.getMouse_x() >= 220 && mouse.getMouse_x() <= 320 && mouse.getMouse_y() >= 460 && mouse.getMouse_y() <= 549) {
+        if (mouse.getMouse_x() >= 520 && mouse.getMouse_x() <= 620 && mouse.getMouse_y() >= 680 && mouse.getMouse_y() <= 780) {
             isEffect_select_2 = false;
         }
-        if (mouse.getMouse_x() >= 320 && mouse.getMouse_x() <= 420 && mouse.getMouse_y() >= 460 && mouse.getMouse_y() <= 549) {
+        if (mouse.getMouse_x() >= 620 && mouse.getMouse_x() <= 720 && mouse.getMouse_y() >= 680 && mouse.getMouse_y() <= 780) {
             isEffect_select_3 = false;
         }
-        if (mouse.getMouse_x() >= 420 && mouse.getMouse_x() <= 520 && mouse.getMouse_y() >= 460 && mouse.getMouse_y() <= 549) {
+        if (mouse.getMouse_x() >= 720 && mouse.getMouse_x() <= 820 && mouse.getMouse_y() >= 680 && mouse.getMouse_y() <= 780) {
             isEffect_select_4 = false;
         }
-        if (mouse.getMouse_x() >= 520 && mouse.getMouse_x() <= 620 && mouse.getMouse_y() >= 460 && mouse.getMouse_y() <= 549) {
+        if (mouse.getMouse_x() >= 820 && mouse.getMouse_x() <= 920 && mouse.getMouse_y() >= 680 && mouse.getMouse_y() <= 780) {
             isEffect_select_5 = false;
         }
-        if (mouse.getMouse_x() >= 620 && mouse.getMouse_x() <= 720 && mouse.getMouse_y() >= 460 && mouse.getMouse_y() <= 549) {
+        if (mouse.getMouse_x() >= 920 && mouse.getMouse_x() <= 1020 && mouse.getMouse_y() >= 680 && mouse.getMouse_y() <= 780) {
             isEffect_select_6 = false;
         }
 
