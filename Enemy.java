@@ -11,6 +11,11 @@ public class Enemy {
     public int damage_count = 0 ;
     public boolean isAlive = true ;
     public int slow = 2 ;
+    public boolean line_1 = true ;
+    public boolean line_2 = true ;
+    public boolean line_3 = true ;
+    public boolean line_4 = true ;
+    public boolean line_5 = true ;
 
     public Enemy() {
 
@@ -25,14 +30,28 @@ public class Enemy {
     }
 
     public void move() {
+
         if(slow <= 0) {
-            if(enemy_y > 65 ) {
-                enemy_y -= speed ;
-            }
-            else {
+            if(enemy_x <= 1270 && enemy_y == 100 &&line_1) {
                 enemy_x += speed ;
             }
-            slow = 2 ;
+            else if (enemy_x >= 1270 && enemy_y <= 440&&line_2) {
+                line_1 = false;
+                enemy_y += speed ;
+            }
+            else if (enemy_x >= 155 && enemy_y >=440 && line_3) {
+                line_2 = false ;
+                enemy_x -= speed;
+            }
+            else if (enemy_x<= 155 && enemy_y <= 620 && line_4){
+                line_3 =false;
+                enemy_y += speed ;
+            }
+            else if (enemy_x <= 1500 && enemy_y >= 620&& line_5) {
+                line_4 = false ;
+                enemy_x += speed ;
+            }
+            slow = 0 ;
         }
         else {
             slow-- ;
@@ -54,6 +73,8 @@ public class Enemy {
         }
         else {
             isAlive =false ;
+
+
         }
     }
 

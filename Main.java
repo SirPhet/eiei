@@ -8,7 +8,7 @@ public class Main {
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setLocationRelativeTo(null);
 
-//        window.setResizable(false) ; //กันทะลึ่งบ้องมาลองบัคเกมกู
+        window.setResizable(false) ; //กันทะลึ่งบ้องมาลองบัคเกมกู
         window.add(new map()) ;
 
         window.setVisible(true);

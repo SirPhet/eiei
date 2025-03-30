@@ -12,7 +12,7 @@ import java.util.Objects;
 public class map extends JPanel implements MouseListener {
     public int high = 810;
     public int width = 1440;
-
+    public Player_info player ;
     private int spawn_x;
     private int spawn_y;
 
@@ -20,10 +20,17 @@ public class map extends JPanel implements MouseListener {
     private int speed = 1;
 
     //Immage
-    private Image map_bg;
-    private Image char_bar;
-    private Image effect_bar;
+    private final Image map_bg;
+    private final Image char_bar;
+    private final Image effect_bar;
 
+    //Char price
+    private final int char_1_pric = 50 ;
+    private final int char_2_pric = 100 ;
+    private final int char_3_pric = 150 ;
+    private final int char_4_pric = 200 ;
+    private final int char_5_pric = 250 ;
+    private final int char_6_pric = 1000 ;
 
     private ArrayList<Char> unit = new ArrayList<>();
     private ArrayList<Enemy> enemy = new ArrayList<>() ;
@@ -54,6 +61,10 @@ public class map extends JPanel implements MouseListener {
         addMouseListener(this);
         addMouseListener(mouse);
 
+        //player info
+        player = new Player_info(100,200) ;
+
+
         ImageIcon bg_map = new ImageIcon("bg_map.png");
         map_bg = bg_map.getImage();
         ImageIcon bar_char = new ImageIcon("char_bar.png");
@@ -62,7 +73,8 @@ public class map extends JPanel implements MouseListener {
         effect_bar = bar_effect.getImage();
 
         //enemy spawm part //ตอนเทสปรับเลือดตรงนี้
-        enemy.add(new Enemy(20000,1,80,550))  ;
+        //start form x45 y 100
+        enemy.add(new Enemy(20000,1,45,100))  ;
 
 
 
@@ -101,10 +113,20 @@ public class map extends JPanel implements MouseListener {
                 }
                 if (target != null && target.isAlive) {
                     units.hit(target);
+
                 }
             }
 
+            //for check enemy alive and add money
+           for (int i =  0 ; i < enemy.size() ; i++) {
+               if (!enemy.get(i).isAlive) {
+                   player.addMoney(100);
+                   enemy.remove(i) ;
 
+               }
+
+
+           }
 
 
 
@@ -129,7 +151,8 @@ public class map extends JPanel implements MouseListener {
         g2d.drawImage(map_bg, 0, 0, width, high, this);
 
 
-
+        //player info update
+        player.draw(g2d);
 
         //Chartactr and enemy paint
         for (Char units : unit) {
@@ -145,7 +168,7 @@ public class map extends JPanel implements MouseListener {
 
 
         //effect selected
-        if(isEffect_select_1) {
+        if(isEffect_select_1  ) {
             g2d.drawImage(effect_bar, 420, 680, 100, 100, this);
 
         }
@@ -219,10 +242,15 @@ public class map extends JPanel implements MouseListener {
         spawn_x = e.getX();
         spawn_y = e.getY();
         if(!(spawn_x >= 420 && spawn_x <= 1020 && spawn_y >= 680 && spawn_y <= 780) &&
-                !(spawn_x >= 3 && spawn_x <=1335 &&spawn_y>= 90 &&spawn_y<=154))  {
-            if(isEffect_select_1) {
+                !(spawn_x >= 3 && spawn_x <=1335 &&spawn_y>= 90 &&spawn_y<=154) &&
+                !(spawn_x>=1253 && spawn_x <= 1336 && spawn_y>=163 && spawn_y <= 500) &&
+                !(spawn_x>=128 && spawn_x <= 1250 && spawn_y>=414 && spawn_y <= 503) &&
+                !(spawn_x >= 128 && spawn_x <= 228 && spawn_y>= 500 && spawn_y <= 600)&&
+                !(spawn_x >= 130 && spawn_x<= 1439 && spawn_y>= 600 && spawn_y <= 685))  {
+            if(isEffect_select_1 && player.coin >= 100) {
                 //ปรับดาเมจตัวแรกตรงนี้
                 unit.add(new Char(1,50,200,20,spawn_x,spawn_y)) ;
+                player.addMoney(-100);
             }
             if(isEffect_select_2) {
                 unit.add(new Char(2,5000,200,20,spawn_x,spawn_y)) ;
