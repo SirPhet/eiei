@@ -34,9 +34,12 @@ public class map extends JPanel implements MouseListener {
 
     private ArrayList<Char> unit = new ArrayList<>();
     private ArrayList<Enemy> enemy = new ArrayList<>() ;
-    //enemy in hitbox
 
 
+    //eney wave spawn delay
+    private int spawnDelay = 2000  ;
+    private int enemy_count = 0  ;
+    private int enemy_deat = 0 ;
 
     private Mouse mouse = new Mouse();
     boolean isClicked = mouse.isMouse_clicked();
@@ -52,6 +55,7 @@ public class map extends JPanel implements MouseListener {
     // Timer for fps
     private Timer timer;
     private Timer timer_for_enemy ;
+
 
     //target setting
     private Enemy target = null ;
@@ -74,7 +78,20 @@ public class map extends JPanel implements MouseListener {
 
         //enemy spawm part //ตอนเทสปรับเลือดตรงนี้
         //start form x45 y 100
-        enemy.add(new Enemy(20000,1,45,100))  ;
+
+        timer_for_enemy = new Timer(spawnDelay,e -> {
+            if(enemy_count < 7) {
+                enemy.add(new Enemy(20000,1,45,100))  ;
+                enemy_count += 1 ;
+
+            }
+            System.out.println(enemy_count);
+        });
+        timer_for_enemy.start();
+
+
+
+
 
 
 
@@ -122,6 +139,8 @@ public class map extends JPanel implements MouseListener {
                if (!enemy.get(i).isAlive) {
                    player.addMoney(100);
                    enemy.remove(i) ;
+                   enemy_deat += 1 ;
+                   System.out.println("enemy_deat"+enemy_deat);
 
                }
 
@@ -253,14 +272,14 @@ public class map extends JPanel implements MouseListener {
                 player.addMoney(-100);
             }
             if(isEffect_select_2) {
-                unit.add(new Char(2,5000,200,20,spawn_x,spawn_y)) ;
+                unit.add(new Char(2,20000,200,20,spawn_x,spawn_y)) ;
             }
 //        if(isEffect_select_3) {
 //            unit.add(new Char(300,200,20,spawn_x,spawn_y)) ;
 //        }
-//        if(isEffect_select_4) {
-//            unit.add(new Char(300,200,20,spawn_x,spawn_y)) ;
-//        }
+             if(isEffect_select_4) {
+               unit.add(new Char(4,300,200,20,spawn_x,spawn_y)) ;
+             }
 //        if(isEffect_select_5) {
 //            unit.add(new Char(300,200,20,spawn_x,spawn_y)) ;
 //        }
