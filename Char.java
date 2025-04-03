@@ -58,8 +58,8 @@ public class Char {
         Char_number_1 = char_1.getImage() ;
         ImageIcon char_2 =new ImageIcon("char2.png") ;
         Char_number_2 = char_2.getImage() ;
-        ImageIcon char_4 = new ImageIcon("char4.png") ;
-        Char_number_4 = char_4.getImage() ;
+        ImageIcon char_5 = new ImageIcon("char5.png") ;
+        Char_number_5 = char_5.getImage() ;
 
 
 
@@ -76,8 +76,8 @@ public class Char {
             g.drawImage(Char_number_2,char_x-30,char_y-30,50,50,form_map) ;
             g.drawOval(char_x-105,char_y-105,range,range);
         }
-        if(number_img == 4) {
-            g.drawImage(Char_number_4,char_x-30,char_y-30,50,50,form_map) ;
+        if(number_img == 5) {
+            g.drawImage(Char_number_5,char_x-30,char_y-30,50,50,form_map) ;
             g.drawOval(char_x-105,char_y-105,range,range);
         }
 

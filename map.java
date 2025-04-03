@@ -55,7 +55,7 @@ public class map extends JPanel implements MouseListener {
     // Timer for fps
     private Timer timer;
     private Timer timer_for_enemy ;
-
+    private int currentWave = 1;
 
     //target setting
     private Enemy target = null ;
@@ -79,15 +79,34 @@ public class map extends JPanel implements MouseListener {
         //enemy spawm part //ตอนเทสปรับเลือดตรงนี้
         //start form x45 y 100
 
-        timer_for_enemy = new Timer(spawnDelay,e -> {
-            if(enemy_count < 7) {
-                enemy.add(new Enemy(20000,1,45,100))  ;
-                enemy_count += 1 ;
 
+        timer_for_enemy = new Timer(spawnDelay, e -> {
+            if (currentWave == 1 && enemy_count < 7) {
+                enemy.add(new Enemy(20000, 1, 45, 100));
+                enemy_count += 1;
+                if (enemy_count == 7) currentWave = 2; // เปลี่ยนไปคลื่นที่สองเมื่อพร้อม
+            } else if (currentWave == 2 && enemy_deat >= 7 && enemy_count < 14) {
+                enemy.add(new Enemy(30000, 2, 45, 100));
+                enemy_count += 1;
             }
-            System.out.println(enemy_count);
         });
         timer_for_enemy.start();
+
+
+
+//        timer_for_enemy = new Timer(spawnDelay,e -> {
+//            if(enemy_count < 7) {
+//                enemy.add(new Enemy(20000,1,45,100))  ;
+//                enemy_count += 1 ;
+//
+//            }
+//            System.out.println(enemy_count);
+//            if (enemy_deat == 7 && enemy_count <14 ) {
+//                enemy.add(new Enemy(30000,2,45,100))  ;
+//                enemy_count += 1 ;
+//            }
+//        });
+//        timer_for_enemy.start();
 
 
 
@@ -105,6 +124,7 @@ public class map extends JPanel implements MouseListener {
 
             for(Enemy enemys : enemy) {
                 enemys.move();
+
             }
             //just for check x y
             if (isClicked) {
@@ -134,18 +154,33 @@ public class map extends JPanel implements MouseListener {
                 }
             }
 
-            //for check enemy alive and add money
-           for (int i =  0 ; i < enemy.size() ; i++) {
-               if (!enemy.get(i).isAlive) {
-                   player.addMoney(100);
-                   enemy.remove(i) ;
-                   enemy_deat += 1 ;
-                   System.out.println("enemy_deat"+enemy_deat);
+            //for check enemy alive and add
 
-               }
+            try {
+                if(enemy.size() != 0) {
+                    for (int i =  0 ; i < enemy.size() ; i++) {
+                        if (!enemy.get(i).isAlive) {
+                            player.addMoney(100);
+                            enemy.remove(i) ;
+                            enemy_deat += 1 ;
+                            System.out.println("enemy_deat"+enemy_deat);
+
+                        }
+                        if(enemy.get(i).enemy_x>1300 && enemy.get(i).enemy_y > 600) {
+                            player.atkTower(50);
+                            enemy.remove(i) ;
+
+                        }
 
 
-           }
+                    }
+                }
+
+            }
+            catch (Exception exception) {
+                System.out.println("out of enemy");
+            }
+
 
 
 
@@ -280,9 +315,9 @@ public class map extends JPanel implements MouseListener {
              if(isEffect_select_4) {
                unit.add(new Char(4,300,200,20,spawn_x,spawn_y)) ;
              }
-//        if(isEffect_select_5) {
-//            unit.add(new Char(300,200,20,spawn_x,spawn_y)) ;
-//        }
+        if(isEffect_select_5) {
+            unit.add(new Char(5,300,200,20,spawn_x,spawn_y)) ;
+        }
 //        if(isEffect_select_6) {
 //            unit.add(new Char(300,200,20,spawn_x,spawn_y)) ;
 //        }
