@@ -39,5 +39,7 @@ public class Player_info {
 
     }
 
-
+    public Font getFont() {
+        return font;
+    }
 }

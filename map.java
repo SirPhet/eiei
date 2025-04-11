@@ -82,11 +82,13 @@ public class map extends JPanel implements MouseListener {
 
         timer_for_enemy = new Timer(spawnDelay, e -> {
             if (currentWave == 1 && enemy_count < 7) {
-                enemy.add(new Enemy(20000, 1, 45, 100));
+                enemy.add(new Enemy(200, 1, 45, 100));
                 enemy_count += 1;
-                if (enemy_count == 7) currentWave = 2; // เปลี่ยนไปคลื่นที่สองเมื่อพร้อม
+                if (enemy_count == 7) {
+                    currentWave = 2;
+                }
             } else if (currentWave == 2 && enemy_deat >= 7 && enemy_count < 14) {
-                enemy.add(new Enemy(30000, 2, 45, 100));
+                enemy.add(new Enemy(200, 2, 45, 100));
                 enemy_count += 1;
             }
         });
@@ -204,6 +206,10 @@ public class map extends JPanel implements MouseListener {
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(map_bg, 0, 0, width, high, this);
 
+        g2d.setFont(player.getFont());
+        String wave_string = String.valueOf(currentWave) ;
+        g2d.drawString("wave "+wave_string,600,70);
+
 
         //player info update
         player.draw(g2d);
@@ -303,7 +309,7 @@ public class map extends JPanel implements MouseListener {
                 !(spawn_x >= 130 && spawn_x<= 1439 && spawn_y>= 600 && spawn_y <= 685))  {
             if(isEffect_select_1 && player.coin >= 100) {
                 //ปรับดาเมจตัวแรกตรงนี้
-                unit.add(new Char(1,50,200,20,spawn_x,spawn_y)) ;
+                unit.add(new Char(1,150,200,20,spawn_x,spawn_y)) ;
                 player.addMoney(-100);
             }
             if(isEffect_select_2) {
@@ -351,6 +357,7 @@ public class map extends JPanel implements MouseListener {
 
 
     }
+
 
     @Override
     public void mousePressed(MouseEvent e) {
