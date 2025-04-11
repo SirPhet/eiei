@@ -90,25 +90,68 @@ public class map extends JPanel implements MouseListener {
             } else if (currentWave == 2 && enemy_deat >= 7 && enemy_count < 14) {
                 enemy.add(new Enemy(200, 2, 45, 100));
                 enemy_count += 1;
+                if (enemy_count == 13) {
+                    currentWave = 3 ;
+                }
+            } else if (currentWave == 3 && enemy_deat >= 11 && enemy_count < 21) {
+                enemy.add(new Enemy(200, 2, 45, 100));
+                enemy_count += 1;
+                if (enemy_count == 20) {
+                    currentWave = 4 ;
+                }
+            } else if (currentWave == 4 && enemy_deat >= 17 && enemy_count < 28 ) {
+                enemy.add(new Enemy(200, 2, 45, 100));
+                enemy_count += 1;
+                if (enemy_count == 28) {
+                    currentWave = 5 ;
+                }
+            }
+            else if (currentWave == 5 && enemy_deat >= 23 && enemy_count < 35 ) {
+                enemy.add(new Enemy(200, 2, 45, 100));
+                enemy_count += 1;
+                if (enemy_count == 35) {
+                    currentWave = 6 ;
+                }
+            }
+            else if (currentWave == 6 && enemy_deat >= 31 && enemy_count < 42 ) {
+                enemy.add(new Enemy(200, 2, 45, 100));
+                enemy_count += 1;
+                if (enemy_count == 42) {
+                    currentWave = 7 ;
+                }
+            }
+            else if (currentWave == 7 && enemy_deat >= 38 && enemy_count < 49 ) {
+                enemy.add(new Enemy(200, 2, 45, 100));
+                enemy_count += 1;
+                if (enemy_count == 49) {
+                    currentWave = 8 ;
+                }
+            }
+            else if (currentWave == 8 && enemy_deat >= 45 && enemy_count < 56 ) {
+                enemy.add(new Enemy(200, 2, 45, 100));
+                enemy_count += 1;
+                if (enemy_count == 56) {
+                    currentWave = 9 ;
+                }
+            }
+            else if (currentWave == 9 && enemy_deat >= 51 && enemy_count < 63 ) {
+                enemy.add(new Enemy(200, 2, 45, 100));
+                enemy_count += 1;
+                if (enemy_count == 63) {
+                    currentWave = 10 ;
+                }
+            }
+            else if (currentWave == 10 && enemy_deat >= 57 && enemy_count < 70 ) {
+                enemy.add(new Enemy(200, 2, 45, 100));
+                enemy_count += 1;
+                if (enemy_count == 70) {
+                    currentWave = 10 ;
+                }
             }
         });
         timer_for_enemy.start();
 
 
-
-//        timer_for_enemy = new Timer(spawnDelay,e -> {
-//            if(enemy_count < 7) {
-//                enemy.add(new Enemy(20000,1,45,100))  ;
-//                enemy_count += 1 ;
-//
-//            }
-//            System.out.println(enemy_count);
-//            if (enemy_deat == 7 && enemy_count <14 ) {
-//                enemy.add(new Enemy(30000,2,45,100))  ;
-//                enemy_count += 1 ;
-//            }
-//        });
-//        timer_for_enemy.start();
 
 
 
